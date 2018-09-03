@@ -16,7 +16,7 @@ import { TestDirective } from './test.directive';
 
 export const DYN_COMP = new InjectionToken<Type<any>>('DYN_COMP');
 
-const Reflect = (global as any).Reflect;
+const Reflect = (window as any).Reflect;
 
 @Component({
   selector: 'app-root',
