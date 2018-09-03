@@ -1,5 +1,21 @@
 # TestDynamicDirectives
 
+Here I'm investigating the possibility to apply
+directives to dynamically rendered components
+in Angular.
+
+### The goals:
+- ~~Support basic directives attachment with
+correct injector~~ [DONE]
+- ~~Support basic life-cycle hooks~~ [DONE]
+- Support inputs and outputs
+- Support `OnChanges` hook for inputs
+- Support different queries (`@HostBinding`, `@ViewChild` etc.)
+
+Once all of above will be achieved
+(or at least first 4) then it can be
+implemented and included in [`ng-dynamic-component`](https://github.com/gund/ng-dynamic-component).
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server
