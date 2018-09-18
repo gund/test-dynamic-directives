@@ -10,6 +10,9 @@ import {
   OnDestroy,
   OnInit,
   SimpleChanges,
+  ViewContainerRef,
+  ChangeDetectorRef,
+  Renderer2,
 } from '@angular/core';
 
 @Directive({
@@ -19,8 +22,11 @@ export class TestDirective
   implements OnInit, OnChanges, OnDestroy, AfterViewInit, AfterContentInit, AfterViewChecked, AfterContentChecked {
   @Input() appTest: any;
 
-  constructor({ nativeElement }: ElementRef) {
+  constructor({ nativeElement }: ElementRef, vcr: ViewContainerRef, cdr: ChangeDetectorRef, renderer: Renderer2) {
     console.log('TestDirective applied on', nativeElement);
+    console.log('TestDirective ViewContainerRef', vcr);
+    console.log('TestDirective ChangeDetectorRef', cdr);
+    console.log('TestDirective Renderer', renderer);
   }
 
   ngOnInit(): void {

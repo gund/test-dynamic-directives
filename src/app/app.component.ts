@@ -6,10 +6,11 @@ import {
   ComponentRef,
   Inject,
   InjectionToken,
+  OnDestroy,
   Optional,
   Type,
   ViewChild,
-  OnDestroy,
+  ViewContainerRef,
 } from '@angular/core';
 
 import { TestDirective } from './test.directive';
@@ -33,6 +34,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   get compInjector() {
     return this.componentRef.injector;
+  }
+
+  get hostVcr(): ViewContainerRef {
+    return this.componentRef['_viewRef']['_viewContainerRef'];
   }
 
   private attachedDirs: any[] = [];
@@ -61,7 +66,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     console.log('Applying directive', dirType);
     console.log('With params', ctorParams);
 
-    const resolvedParams = ctorParams.map((p) => this.compInjector.get(p));
+    const resolvedParams = ctorParams.map((p) => this.resolveDep(p));
     const instance = new dirType(...resolvedParams);
     const dirRef = {
       instance,
@@ -86,6 +91,16 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private callHook(obj: any, hook: string, args: any[] = []) {
     if (obj[hook]) {
       obj[hook](...args);
+    }
+  }
+
+  private resolveDep(dep: any): any {
+    return this.maybeResolveVCR(dep) || this.compInjector.get(dep);
+  }
+
+  private maybeResolveVCR(dep: any): ViewContainerRef | undefined {
+    if (dep === ViewContainerRef) {
+      return this.hostVcr;
     }
   }
 }
