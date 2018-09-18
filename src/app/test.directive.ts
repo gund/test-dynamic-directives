@@ -19,10 +19,21 @@ import {
   selector: '[appTest]',
 })
 export class TestDirective
-  implements OnInit, OnChanges, OnDestroy, AfterViewInit, AfterContentInit, AfterViewChecked, AfterContentChecked {
+  implements OnInit,
+    OnChanges,
+    OnDestroy,
+    AfterViewInit,
+    AfterContentInit,
+    AfterViewChecked,
+    AfterContentChecked {
   @Input() appTest: any;
 
-  constructor({ nativeElement }: ElementRef, vcr: ViewContainerRef, cdr: ChangeDetectorRef, renderer: Renderer2) {
+  constructor(
+    { nativeElement }: ElementRef,
+    vcr: ViewContainerRef,
+    cdr: ChangeDetectorRef,
+    renderer: Renderer2,
+  ) {
     console.log('TestDirective applied on', nativeElement);
     console.log('TestDirective ViewContainerRef', vcr);
     console.log('TestDirective ChangeDetectorRef', cdr);
